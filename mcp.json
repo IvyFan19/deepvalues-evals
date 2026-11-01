@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "deepvalues": {
+      "type": "http",
+      "url": "https://app.deepvalues.ai/api/mcp",
+      "headers": { "Authorization": "Bearer ${DEEPVALUES_API_KEY}" }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "date": "2026-11-01",
+    "model": null,
+    "mode": "keyless"
+  },
+  "results": [
+    {
+      "id": "market-level",
+      "pass": true,
+      "tools": [
+        "ToolSearch",
+        "indicators_buffett",
+        "indicators_shiller_pe"
+      ],
+      "tool_errors": 0,
+      "answer": "**Yes, the US stock market is very expensive today.** Both DeepValues indicators are in their top zone, near the highest levels in their histories.\n\n| Indicator | Reading | Zone | Historical percentile | As of |\n|---|---|---|---|---|\n| **Buffett Indicator** (US corporate equities \u00f7 GDP) | **255.0%** | Significantly overvalued (above 135) | **99.7th** | 2026-04-01 |\n| **Shiller PE** | **40.13** | Significantly overvalued (above 34) | **98.6th** | 2026-10-30 |\n\n- **Buffett Indicator:** it's about 1.9 times the 135 line where the top zone starts. It's also well above the 218.7 peak of 2021 in the five-year history I pulled.\n- **Shiller PE:** it's about 18% above its 34 threshold. It has stayed around 40\u201341 since May 2026, up about 2.5% from a year ago and down about 1.7% from a month ago.\n\n**Issues with the Buffett data:**\n- **The reading is older:** it's dated 2026-04-01, while the Shiller PE is current to two days ago. The dips in the series line up with market falls as if it uses Fed/FRED-style quarter labels. If so, this is the Q2 figure, covering roughly end-June, but that's my inference.\n- **The `yoy_change_pct` field looks wrong:** it reports +43.5%, but the tool's own history gives about +19.6% (213.3 to 255.0). The 43.5% matches a comparison with April 2023, 12 quarters back, so it's probably a three-year change.\n- **The `mom_change_pct` field is mislabeled:** its +16.2% is really a quarter-over-quarter change, from 219.5 to 255.0.\n- **The latest jump looks large:** that +16.2% is about double the roughly 8% rise in the Shiller PE from March to June. It may reflect GDP timing or data revisions, so I'd treat the exact 255 with some caution. Even so, the zone wouldn't change, since a reading of 219 is still far above 135.\n\nNeither indicator says when prices might fall, as markets can stay expensive for years. They suggest that long-term returns from these levels may be below average. This is informational only, not investment advice.",
+      "reasons": [],
+      "cost_usd": 0.20609480000000002,
+      "seconds": 30.2
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "holders-aapl",
+    "prompt": "Using the DeepValues tools, which tracked investors hold Apple (AAPL) in the most recent quarter? Name the top three by position size and the quarter the data is from.",
+    "must_use": ["smart_money_holdings"],
+    "expect": ["(?i)apple|AAPL", "20\\d\\d"],
+    "forbid": ["(?i)i (can|do) ?n[o']t have access", "(?i)as an ai"]
+  },
+  {
+    "id": "intrinsic-brkb",
+    "prompt": "With the DeepValues tools, is Berkshire Hathaway (BRK.B) trading above or below intrinsic value right now? Give the fair value the models produce and say whether they agree.",
+    "must_use": ["intrinsic_value"],
+    "expect": ["(?i)intrinsic|fair value", "\\$?\\d{2,4}"],
+    "forbid": ["(?i)i (can|do) ?n[o']t have access"]
+  },
+  {
+    "id": "buffett-moves",
+    "prompt": "What were Warren Buffett's most recent filed portfolio moves according to DeepValues? List up to five with the action (new, added, trimmed, exited) and the filing date.",
+    "must_use": ["guru_moves", "guru_portfolio", "smart_money_changes"],
+    "expect": ["(?i)buffett|berkshire", "(?i)new|added|trimmed|exited|bought|sold"],
+    "forbid": ["(?i)i (can|do) ?n[o']t have access"]
+  },
+  {
+    "id": "market-level",
+    "prompt": "Is the US stock market expensive today? Use the DeepValues Buffett Indicator and Shiller PE tools and quote both readings with their zone or percentile.",
+    "must_use": ["indicators_buffett", "indicators_shiller_pe"],
+    "expect": ["(?i)buffett indicator", "(?i)shiller", "\\d+(\\.\\d+)?\\s?%|\\d+(\\.\\d+)?x|\\d{2,3}"],
+    "forbid": ["(?i)i (can|do) ?n[o']t have access"]
+  },
+  {
+    "id": "grounded-nvda",
+    "prompt": "Write a four-sentence value investor's take on NVIDIA (NVDA). Before writing, pull the DeepValues ai_context for NVDA and ground every claim in it; quote the as-of date.",
+    "must_use": ["ai_context"],
+    "expect": ["(?i)nvidia|NVDA", "20\\d\\d"],
+    "forbid": ["(?i)i (can|do) ?n[o']t have access"]
+  },
+  {
+    "id": "filings-msft",
+    "prompt": "Using DeepValues, when did Microsoft (MSFT) last file a 10-K, and what other forms has it filed recently? Give dates.",
+    "must_use": ["filings"],
+    "expect": ["10-K", "20\\d\\d"],
+    "forbid": ["(?i)i (can|do) ?n[o']t have access"]
+  },
+  {
+    "id": "fundamentals-ko",
+    "prompt": "From the DeepValues fundamentals for Coca-Cola (KO), report the latest annual revenue, net income and free cash flow, with the fiscal year.",
+    "must_use": ["fundamentals"],
+    "expect": ["(?i)revenue", "(?i)net income", "20\\d\\d"],
+    "forbid": ["(?i)i (can|do) ?n[o']t have access"]
+  },
+  {
+    "id": "guru-lookup",
+    "prompt": "Who is Li Lu according to DeepValues, and what are his top holdings? Use the guru roster to find his slug first.",
+    "must_use": ["gurus", "guru"],
+    "expect": ["(?i)li lu", "(?i)holding|position"],
+    "forbid": ["(?i)i (can|do) ?n[o']t have access"]
+  },
+  {
+    "id": "sentiment-tsla",
+    "prompt": "What is value-investor sentiment on Tesla (TSLA) over the last 7 days per DeepValues? Give the reading and the source mix.",
+    "must_use": ["sentiment"],
+    "expect": ["(?i)tesla|TSLA", "(?i)bullish|bearish|neutral|sentiment"],
+    "forbid": ["(?i)i (can|do) ?n[o']t have access"]
+  },
+  {
+    "id": "unknown-ticker",
+    "prompt": "Using DeepValues, what is the intrinsic value of the ticker ZZZQ? If the API has no data, say so plainly instead of guessing.",
+    "must_use": ["intrinsic_value", "companies_search"],
+    "expect": ["(?i)no data|not found|unknown|does ?n[o']t (exist|have)|could ?n[o']t find|no (such|matching)"],
+    "forbid": ["(?i)intrinsic value (is|of) \\$\\d"]
+  }
+]
