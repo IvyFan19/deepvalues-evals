@@ -25,6 +25,7 @@ import pathlib
 import re
 import subprocess
 import sys
+import tempfile
 import time
 
 ROOT = pathlib.Path(__file__).resolve().parent
@@ -38,14 +39,19 @@ def run_task(task: dict, model: str | None, mcp_config: pathlib.Path, max_turns:
         "--output-format", "stream-json", "--verbose",
         "--mcp-config", str(mcp_config), "--strict-mcp-config",
         "--allowedTools", "mcp__deepvalues__*",
+        # Only the DeepValues tools: no shell, no files, no web. The first runs
+        # showed the agent reading an earlier results file from the repo.
+        "--disallowedTools", "Bash,Read,Edit,Write,Glob,Grep,WebFetch,WebSearch,NotebookEdit,Agent,Skill",
         "--max-turns", str(max_turns),
         "--permission-mode", "dontAsk",
     ]
     if model:
         cmd += ["--model", model]
     t0 = time.time()
+    # An empty working directory, so nothing on disk can leak into an answer.
+    scratch = tempfile.mkdtemp(prefix="dv-eval-")
     try:
-        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, cwd=ROOT)
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, cwd=scratch)
     except subprocess.TimeoutExpired:
         return {"id": task["id"], "pass": False, "error": f"timeout after {timeout}s", "tools": [], "answer": "", "seconds": timeout}
     tools: list[str] = []
