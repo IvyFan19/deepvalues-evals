@@ -19,5 +19,7 @@ log "result: $PASS passed (exit $RC)"
 git add results >/dev/null 2>&1 && git commit -qm "evals: $(date +%F), $PASS" >/dev/null 2>&1 && log "committed"
 git remote get-url origin >/dev/null 2>&1 && { git push -q origin main 2>>"$LOG" && log "pushed" || log "push failed"; }
 # A failing night is worth a glance.
+# A task that failed in two of the last three runs gets a fix PR (fix-failures.sh).
+bash "$HOME/.deepvalues-evals/fix-failures.sh" >>"$LOG" 2>&1
 [ "$RC" -ne 0 ] && osascript -e "display notification \"$PASS passed, see results/latest.md\" with title \"DeepValues agent evals FAILED\"" 2>/dev/null
 exit 0
