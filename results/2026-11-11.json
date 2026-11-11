@@ -1,0 +1,150 @@
+{
+  "meta": {
+    "date": "2026-11-11",
+    "model": null,
+    "mode": "keyless"
+  },
+  "results": [
+    {
+      "id": "holders-aapl",
+      "pass": false,
+      "tools": [],
+      "tool_errors": 0,
+      "answer": "Failed to authenticate: OAuth session expired and could not be refreshed",
+      "reasons": [
+        "expected one of ['smart_money_holdings'] to be called; called nothing",
+        "answer lacks /(?i)apple|AAPL/",
+        "answer lacks /20\\d\\d/"
+      ],
+      "cost_usd": 0,
+      "seconds": 2.2
+    },
+    {
+      "id": "intrinsic-brkb",
+      "pass": false,
+      "tools": [],
+      "tool_errors": 0,
+      "answer": "Failed to authenticate: OAuth session expired and could not be refreshed",
+      "reasons": [
+        "expected one of ['intrinsic_value'] to be called; called nothing",
+        "answer lacks /(?i)intrinsic|fair value/",
+        "answer lacks /\\$?\\d{2,4}/"
+      ],
+      "cost_usd": 0,
+      "seconds": 2.2
+    },
+    {
+      "id": "buffett-moves",
+      "pass": false,
+      "tools": [],
+      "tool_errors": 0,
+      "answer": "Failed to authenticate: OAuth session expired and could not be refreshed",
+      "reasons": [
+        "expected one of ['guru_moves', 'guru_portfolio', 'smart_money_changes'] to be called; called nothing",
+        "answer lacks /(?i)buffett|berkshire/",
+        "answer lacks /(?i)new|added|trimmed|exited|bought|sold/"
+      ],
+      "cost_usd": 0,
+      "seconds": 1.7
+    },
+    {
+      "id": "market-level",
+      "pass": false,
+      "tools": [],
+      "tool_errors": 0,
+      "answer": "Failed to authenticate: OAuth session expired and could not be refreshed",
+      "reasons": [
+        "expected one of ['indicators_buffett', 'indicators_shiller_pe'] to be called; called nothing",
+        "answer lacks /(?i)buffett indicator/",
+        "answer lacks /(?i)shiller/",
+        "answer lacks /\\d+(\\.\\d+)?\\s?%|\\d+(\\.\\d+)?x|\\d{2,3}/"
+      ],
+      "cost_usd": 0,
+      "seconds": 1.8
+    },
+    {
+      "id": "grounded-nvda",
+      "pass": false,
+      "tools": [],
+      "tool_errors": 0,
+      "answer": "Failed to authenticate: OAuth session expired and could not be refreshed",
+      "reasons": [
+        "expected one of ['ai_context'] to be called; called nothing",
+        "answer lacks /(?i)nvidia|NVDA/",
+        "answer lacks /20\\d\\d/"
+      ],
+      "cost_usd": 0,
+      "seconds": 4.5
+    },
+    {
+      "id": "filings-msft",
+      "pass": false,
+      "tools": [],
+      "tool_errors": 0,
+      "answer": "Failed to authenticate: OAuth session expired and could not be refreshed",
+      "reasons": [
+        "expected one of ['filings'] to be called; called nothing",
+        "answer lacks /10-K/",
+        "answer lacks /20\\d\\d/"
+      ],
+      "cost_usd": 0,
+      "seconds": 1.2
+    },
+    {
+      "id": "fundamentals-ko",
+      "pass": false,
+      "tools": [],
+      "tool_errors": 0,
+      "answer": "Failed to authenticate: OAuth session expired and could not be refreshed",
+      "reasons": [
+        "expected one of ['fundamentals'] to be called; called nothing",
+        "answer lacks /(?i)revenue/",
+        "answer lacks /(?i)net income/",
+        "answer lacks /20\\d\\d/"
+      ],
+      "cost_usd": 0,
+      "seconds": 1.3
+    },
+    {
+      "id": "guru-lookup",
+      "pass": false,
+      "tools": [],
+      "tool_errors": 0,
+      "answer": "Failed to authenticate: OAuth session expired and could not be refreshed",
+      "reasons": [
+        "expected one of ['gurus', 'guru'] to be called; called nothing",
+        "answer lacks /(?i)li lu/",
+        "answer lacks /(?i)holding|position/"
+      ],
+      "cost_usd": 0,
+      "seconds": 1.4
+    },
+    {
+      "id": "sentiment-tsla",
+      "pass": false,
+      "tools": [],
+      "tool_errors": 0,
+      "answer": "Failed to authenticate: OAuth session expired and could not be refreshed",
+      "reasons": [
+        "expected one of ['sentiment'] to be called; called nothing",
+        "answer lacks /(?i)tesla|TSLA/",
+        "answer lacks /(?i)bullish|bearish|neutral|sentiment/"
+      ],
+      "cost_usd": 0,
+      "seconds": 1.8
+    },
+    {
+      "id": "unknown-ticker",
+      "pass": false,
+      "tools": [],
+      "tool_errors": 0,
+      "answer": "Failed to authenticate: OAuth session expired and could not be refreshed",
+      "reasons": [
+        "expected one of ['intrinsic_value', 'companies_search'] to be called; called nothing",
+        "answer lacks /(?i)no data|not found|unknown|does ?n[o']t (exist|have)|could ?n[o']t find|no (such|matching)/"
+      ],
+      "cost_usd": 0,
+      "seconds": 1.9
+    }
+  ]
+}
