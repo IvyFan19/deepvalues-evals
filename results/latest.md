@@ -1,203 +1,215 @@
-# DeepValues agent evals, 2026-11-16
+# DeepValues agent evals, 2026-11-17
 
-9/10 tasks passed. Model: default. Mode: keyless. Cost: $0.81.
+10/10 tasks passed. Model: default. Mode: keyless. Cost: $0.83.
 
 | Task | Result | Tools called | Seconds | Why |
 |---|---|---|---|---|
-| holders-aapl | pass | ToolSearch, smart_money_holdings | 11.3 |  |
-| intrinsic-brkb | pass | ToolSearch, intrinsic_value | 12.9 |  |
-| buffett-moves | pass | ToolSearch, guru_moves | 13.8 |  |
-| market-level | pass | ToolSearch, indicators_buffett, indicators_shiller_pe | 13.0 |  |
-| grounded-nvda | pass | ToolSearch, ai_context | 13.9 |  |
-| filings-msft | pass | ToolSearch, filings, filings | 12.5 |  |
-| fundamentals-ko | pass | ToolSearch, fundamentals | 8.4 |  |
-| guru-lookup | pass | ToolSearch, gurus, guru | 15.9 |  |
-| sentiment-tsla | pass | ToolSearch, sentiment, sentiment, sentiment | 11.1 |  |
-| unknown-ticker | FAIL | ToolSearch, intrinsic_value | 8.6 | answer lacks /(?i)no data|not found|unknown|does ?n[o']t (exist|have)|could ?n[o']t find|no (such|matching)/ |
+| holders-aapl | pass | ToolSearch, smart_money_holdings | 11.8 |  |
+| intrinsic-brkb | pass | ToolSearch, intrinsic_value | 14.2 |  |
+| buffett-moves | pass | ToolSearch, guru_moves | 14.4 |  |
+| market-level | pass | ToolSearch, indicators_buffett, indicators_shiller_pe | 16.2 |  |
+| grounded-nvda | pass | ToolSearch, ai_context | 10.5 |  |
+| filings-msft | pass | ToolSearch, filings, filings | 12.4 |  |
+| fundamentals-ko | pass | ToolSearch, fundamentals | 10.4 |  |
+| guru-lookup | pass | ToolSearch, gurus, guru | 16.6 |  |
+| sentiment-tsla | pass | ToolSearch, sentiment, sentiment, sentiment | 12.3 |  |
+| unknown-ticker | pass | ToolSearch, intrinsic_value | 8.1 |  |
 
 ## Answers
 
 ### holders-aapl
 
-The data covers the quarter ending **September 30, 2026** (Q3 2026, from 13F-HR filings). In that quarter, **12 of the investors DeepValues tracks held AAPL**, with about **$1.24B** in combined positions. That total is down about 30% from the prior quarter.
+The data is from the **quarter ending September 30, 2026 (Q3 2026)**, based on 13F-HR filings. That's the latest quarter DeepValues has. In that quarter, **27 of the 60 tracked investors** held Apple, with about **$97.5B** in AAPL between them. That total is down 2.23% from the previous quarter.
 
-**Top three by position size:**
+**Top three by position size (USD):**
 
-| # | Investor (fund) | Shares | Value | % of portfolio | Change from prior quarter |
+| # | Investor (Fund) | Shares | Position value | % of their portfolio | Change vs. prior quarter |
 |---|---|---|---|---|---|
-| 1 | Baillie Gifford | 1,626,854 | $541.8M | 0.51% | Trimmed 7.6% |
-| 2 | Tom Gayner (Markel Group) | 1,227,290 | $408.7M | 3.18% | Unchanged |
-| 3 | George Soros (Soros Fund Management) | 393,680 | $131.1M | 2.47% | Trimmed 25.7% |
+| 1 | **Warren Buffett** (Berkshire Hathaway) | 227.9M | ~$75.9B | 24.95% | Unchanged |
+| 2 | **Duan Yongping** (H&H International) | 21.2M | ~$7.06B | 41.07% | Cut by 5.9M shares (−21.8%) |
+| 3 | **Cliff Asness** (AQR Capital) | 20.9M | ~$6.96B | 2.06% | Added 3.3M shares (+19.0%) |
 
-**The other nine holders, largest first:** Dan Bin (Oriental Harbor, new position, $91.4M), Mario Gabelli (GAMCO), Francis Chou, Dodge & Cox, François Rochon (Giverny), Tom Russo, Jim Simons (Renaissance, cut 99.8% to almost nothing), Polen Capital and Sequoia Fund.
+Berkshire's position alone is about 78% of all the AAPL held by tracked investors. Duan Yongping holds far less, but Apple is a much bigger share of his portfolio (41%).
 
-**Other notes:**
-- By share of portfolio, the most committed holders are Francis Chou (6.29%) and Dan Bin (6.22%), even though their positions are much smaller in dollars.
-- Berkshire Hathaway is not on the list. The tool only covers DeepValues' 60 tracked investors, so this may not mean Berkshire sold AAPL.
+**Other notable holders and moves:**
+- D. E. Shaw, Ken Griffin (Citadel) and Two Sigma round out the top six, each holding about $1.4–1.7B.
+- **Dan Bin** (Oriental Harbor) bought AAPL for the first time this quarter (~$91M, 6.2% of his portfolio).
+- **Jim Simons' Renaissance Technologies** sold almost all of its stake (−99.8%).
+- **Israel Englander** (Millennium) more than doubled his position (+120%).
+
+Source: DeepValues smart-money holdings. This is for information only, not investment advice.
 
 ### intrinsic-brkb
 
-**The two models disagree, so there's no single answer.** The headline Owner Earnings model says BRK.B is about 10% undervalued. The DCF says it's well overvalued. Averaging the two puts it about 20% above intrinsic value.
+**The models disagree, so there's no single answer. Owner Earnings puts Berkshire below intrinsic value; the free-cash-flow DCF and the blend put it above.**
 
-**Price:** $592.94 (close on Nov 13, 2026)
+BRK.B closed at **$592.85** (price as of Nov 16, 2026; inputs are FY2025 SEC filings).
 
-| Method | Conservative | Base | Optimistic | Base vs. price |
-|---|---|---|---|---|
-| **Owner Earnings** (the one DeepValues headlines) | $460.53 | **$657.90** | $657.90 | **~11% below fair value** (undervalued) |
-| **DCF on free cash flow** | $117.38 | **$292.26** | $552.30 | **~103% above fair value** (overvalued) |
-| Damodaran two-stage | — | not computed | — | — |
-| **Average of the two base values** | | **$475.08** | | **~20% above fair value** (overvalued) |
+| Method | Base fair value | Range (conservative–optimistic) | vs. price |
+|---|---|---|---|
+| Owner Earnings (the headline "lead" value) | **$657.90** | $460.53 – $657.90 | ~11% **below** value |
+| DCF on free cash flow | **$292.26** | $117.38 – $552.30 | ~51% **above** value |
+| Damodaran two-stage | not run (not suited to a financial-sector company) | — | — |
+| **Equal-weight blend** (Owner Earnings + DCF) | **$475.08** | — | ~20% **above** value |
 
-**The Owner Earnings model is the better fit here:**
-- **Damodaran was skipped.** The tool doesn't run it for financial-sector companies, and Berkshire's insurance business puts it in that group. So the average has only two models in it, not three. That also means there's no Monte Carlo range: only the midpoint is filled in.
-- **The two models differ by more than 2x ($292 vs. $658).** A cash-flow DCF tends to undervalue Berkshire. Insurance float, large investment holdings and heavy capital spending in the railroad and utility businesses all push its free cash flow down. Owner Earnings (Buffett's own measure) adjusts for that. This is why DeepValues headlines that number.
-- **Even Owner Earnings gives little room for error.** Its base value is about 11% above the price, but its conservative case ($460.53) is below today's price.
+**How far apart they are:** the Owner Earnings value is about 2.25 times the DCF value. Even the DCF's optimistic case ($552) is below today's price, and the Owner Earnings conservative case ($461) is below the price too.
 
-Both models use FY2025 SEC figures. All the data quality checks passed: price is fresh and the currency matches. This is data and analysis, not investment advice.
+**How I'd read it:**
+- DeepValues headlines Owner Earnings. On that number the stock is modestly cheap at ~$658, but the price sits inside a ±25% band around it (~$493–$822). That's closer to "around fair value" than "clearly cheap."
+- A free-cash-flow DCF tends to undervalue Berkshire. Its insurance float and large Treasury and cash holdings don't show up well in operating free cash flow, so I'd give the $292 figure less weight. That's my judgment, not something the tool says. It also pulls the blend down to $475.
+- With the methods this far apart, the honest summary is "roughly fairly valued, possibly a bit cheap on owner earnings." It's not a clear mispricing either way.
+
+This is data and analysis, not investment advice.
 
 ### buffett-moves
 
-DeepValues' five most recent filed moves for Warren Buffett all come from one 13F. It covers the quarter ending June 30, 2026 and was **filed August 14, 2026**.
+Here are Warren Buffett's five most recent moves on DeepValues. They all come from one 13F filing, filed **2026-11-16**, which covers the quarter ended 2026-09-30.
 
-| # | Ticker | Company | Action | Shares (before → after) | Position value |
+| # | Ticker | Company | Action | Shares (prev → now) | Position value |
 |---|---|---|---|---|---|
-| 1 | GOOGL | Alphabet Inc. (Class A) | **Added** | 54.2M → 78.8M (+45%) | ~$28.2B (9.4% of portfolio) |
-| 2 | BAC | Bank of America | **Trimmed** | 513.6M → 483.4M (−6%) | ~$27.5B (9.2%) |
-| 3 | GOOG | Alphabet (Class C) | **Added** | 3.6M → 27.2M (~7.6×) | ~$9.6B (3.2%) |
-| 4 | DVA | DaVita Inc. | **Trimmed** | 30.1M → 28.9M (−4%) | ~$6.4B (2.2%) |
-| 5 | DAL | Delta Air Lines | **Added** | 39.8M → 57.3M (+44%) | ~$5.4B (1.8%) |
+| 1 | BAC | Bank of America | **Trimmed** | 483.4M → 455.9M (−5.7%) | ~$24.8B (8.2% of portfolio) |
+| 2 | DAL | Delta Air Lines | **Added** | 57.3M → 64.5M (+12.4%) | ~$5.38B (1.8%) |
+| 3 | DVA | DaVita | **Trimmed** | 28.88M → 28.70M (−0.6%) | ~$5.02B (1.7%) |
+| 4 | LEN | Lennar | **Added** | 13.1M → 26.0M (+98.6%) | ~$2.12B (0.7%) |
+| 5 | KR | Kroger | **Trimmed** | 39.0M → 35.0M (−10.3%) | ~$2.05B (0.7%) |
 
-- **No new positions or exits** appear in these five. The feed seems to order moves from the same filing by position size, so smaller new positions or exits from that 13F could fall outside the top five.
-- **The Q3 2026 13F isn't in the feed yet.** It was due around November 14, so it may have been filed but not reached DeepValues. Moves from July through September won't show here until it does.
-- **13F data is delayed.** These trades were made by June 30 and only became public 45 days later.
+- **No new positions or full exits are in these five.** They appear to be listed by position size, and I asked for only five. So the filing may include new or exited positions further down; I can pull the full list if you want.
+- **Why some small changes appear:** DeepValues lists any position worth $100M or more, so small changes like the 0.6% DaVita trim show up.
+- **DeepValues' own verdicts:**
+  - DaVita: sold about 24% below DeepValues' value range ($228–$381, versus about $174 now).
+  - Delta, Lennar and Kroger: DeepValues says its estimates disagree too much to call.
+  - Bank of America: DeepValues has no valuation yet.
+- **Timing:** 13F filings come out about 47 days after the quarter ends, so these trades happened sometime between July and September 2026.
 
-This is informational only, not investment advice.
+This is for information only, not investment advice.
 
 ### market-level
 
-Yes. By both measures the US market is expensive compared with its own history.
+Yes, both measures say the US market is expensive. Each one is in its "significantly overvalued" zone.
 
-| Indicator | Reading | Zone | Historical percentile | As of |
+| Indicator | Current reading | Zone | Historical percentile | As of |
 |---|---|---|---|---|
-| **Buffett Indicator** (US corporate equities ÷ GDP) | **255.0%** | Significantly overvalued (above 135%) | **99.7th** | 2026-04-01 |
-| **Shiller PE (CAPE)** | **39.95** | Significantly overvalued (above 34) | **93.8th** | 2026-11-13 |
+| **Buffett Indicator** (US corporate equities ÷ GDP) | **255%** | Significantly overvalued (above 135%) | **99.7th** | 2026-04-01 |
+| **Shiller PE (CAPE)** | **39.16** | Significantly overvalued (above 34) | **93.3rd** | 2026-11-16 |
 
 **Buffett Indicator**
-- 255% is the highest reading in the 5-year history I pulled. The 2021 peak was about 219%.
-- It is about 2.2 times the top of the tool's "fair value" band (115%) and almost 1.9 times the "significantly overvalued" line (135%).
-- It rose 43.5% year over year and about 16% from the previous reading (Jan 2026: 219%).
-- This reading is about 7½ months old. The series is quarterly and depends on GDP and Fed data, so it may have changed since April.
+- At 255%, it is nearly double the 135% cutoff for "significantly overvalued." Fair value on this scale is about 90–115%.
+- It is higher than at almost any point in the dataset, and above the late-2021 peak of about 219%.
+- **This reading is about 7.5 months old.** The ratio relies on quarterly GDP and Fed data, so the latest point is April 1, 2026. Later price changes aren't included.
+- It jumped from 219% to 255% between the January and April 2026 readings. The tool labels that +16% as "month-over-month," but the data is quarterly, so it's really a quarter-over-quarter change. Year over year it's up about 43.5%.
 
 **Shiller PE**
-- 39.95 is above the tool's "significantly overvalued" line (34) and well above its "fair value" range (22–28).
-- It has eased slightly: down 2.3% from a year ago and about 2% from the 2026 highs near 42.6 in August. It is still near the top of its history.
-- This is the more current reading, as of last Friday.
+- This reading is current, as of yesterday. At 39.16 it is about 15% above the 34 cutoff for "significantly overvalued." The fair-value band is roughly 22–28.
+- It peaked at about 42.65 in mid-August 2026 and has eased since. In the past couple of weeks it has mostly been in the 39–40 range.
+- Its level is about the same as a year ago (39.16 in November 2025). The tool reports year-over-year −4.6% and month-over-month −2.0%, but those figures don't match the history it returned, so I'd go by the levels rather than those percentages.
 
-**Bottom line:** Both measures put the market in their most expensive zone. The Buffett Indicator is close to its all-time historical extreme and the Shiller PE is in the top ~6%. High valuations have historically pointed to lower long-run (10-year) returns, but they are poor at predicting when prices will fall. Markets can stay expensive for years.
-
-*This is for information only, not investment advice.*
+**Bottom line:** Both indicators put US stocks near the top of their historical ranges. That has tended to come before lower-than-average long-run returns. It hasn't been a reliable short-term timing signal, though, since markets can stay expensive for years. Treat this as information, not investment advice.
 
 ### grounded-nvda
 
-**NVIDIA (NVDA): a value investor's take, using DeepValues ai_context as of 2026-11-16T14:15:58Z**
+As of **2026-11-17T14:16:05Z**, DeepValues rates NVIDIA **WATCH**: it calls NVDA an exceptional, asset-light business with a real moat in CUDA, developer adoption, networking and full-stack accelerated computing, backed by a 71.1% gross margin, extraordinary returns on capital and no sign of financial distress. The problem is the price, not the business: at $156 a share (about a $3.83 trillion market cap), the free-cash-flow yield is only about 2.6%, which seems to assume low-to-mid-teens cash-flow growth for many years and margins that stay unusually high. That leaves little margin of safety if margins come down, cash conversion stays weak, or customers move some inference work to custom chips and rival accelerators, even though big funds are still buying (AQR, Baillie Gifford, Millennium and Tiger Global all added shares in the 9/30/2026 13F filings, while D. E. Shaw trimmed). A value investor who already owns NVDA can keep a properly sized position, but a new buyer should either start small and add in stages or wait for a lower price or clearer proof that free cash flow per share can keep growing.
 
-NVIDIA is an exceptional business: DeepValues cites a 71.1% gross margin and a 107.2% ROIC, and says CUDA, its software tools, networking and full systems create real switching costs that go well beyond any single chip. The main long-term risk isn't the share price moving around but whether NVIDIA can keep raising prices, which cloud providers' in-house chips, competition in inference and dependence on a few large customers could all wear down. On a market cap of about $3.99 trillion, DeepValues' stance is WATCH rather than BUY, because its own sources disagree on the price ($163, $220, and above $230) and don't give free cash flow per share, net cash or stock-based compensation for a single date. Its suggested plan is to verify the data first, buy at most 25% of a target position only if a price near $163 is confirmed and normalized free cash flow per share is $6–8, not chase at $220–230, and add later only on proof of cash flow, gross margin and inference demand, never just because the price fell.
-
-**Notes on the data:**
-- The guru data is mixed. Baillie Gifford added shares in its September 30, 2026 filing (now 42.6M shares, 9.2% of its portfolio). As of June 30, Altimeter, AQR and D. E. Shaw added, while Citadel, Millennium and Tiger Global trimmed. I left this out of the four sentences because it doesn't point one way.
-- DeepValues doesn't resolve the price conflict itself, so the valuation conclusion depends on which price is right. Check the current quote before acting on it.
-- The context shows sector and industry as "n/a," and the research text was cut off partway through. Some parts of the full analysis may be missing.
+**Caveats:**
+- The data reports a 19.74 P/E, which conflicts with the 2.6% FCF yield. DeepValues says this needs to be reconciled before calling the stock cheap, so I left the P/E out of the take.
+- The briefing text was cut off partway through, and the sector and industry fields came back empty.
 
 This is for information only, not investment advice.
 
 ### filings-msft
 
-Microsoft's most recent 10-K was filed on **July 29, 2026**. It covers the fiscal year ended June 30, 2026 ([document](https://www.sec.gov/Archives/edgar/data/000789019/000119312526323660/msft-20260630.htm)). The one before it was filed on July 30, 2025, for fiscal year 2025.
+Microsoft last filed a 10-K on **July 29, 2026**. It's the annual report for the fiscal year ended June 30, 2026 ([filing](https://www.sec.gov/Archives/edgar/data/000789019/000119312526323660/msft-20260630.htm)). The 10-K before that was filed on July 30, 2025.
 
-**Filings since the 10-K, newest first:**
+**Filings since then, newest first:**
 
-| Filed | Form | Notes |
+| Filed | Form | What it is |
 |---|---|---|
-| 2026-11-05 | 8-K | Event dated Nov 4, 2026 |
-| 2026-11-04 | 8-K | Event dated Oct 29, 2026 |
-| 2026-10-28 | 8-K (×2) | Filed alongside the Q1 FY27 earnings |
-| 2026-10-28 | 10-Q | Quarter ended Sep 30, 2026 (Q1 FY2027) |
-| 2026-10-21 | DEF 14A | Proxy for the annual meeting on Dec 8, 2026 |
-| 2026-09-02 | 8-K | — |
-| 2026-07-29 | 8-K | Filed the same day as the 10-K (likely the FY26 Q4 earnings release) |
+| 2026-11-05 | 8-K | Current report (event dated Nov 4) |
+| 2026-11-04 | 8-K | Current report (event dated Oct 29) |
+| 2026-10-28 | 8-K (×2) | Current reports filed the same day as the 10-Q, likely including the Q1 FY27 earnings release |
+| 2026-10-28 | **10-Q** | Quarterly report for the quarter ended Sept 30, 2026 |
+| 2026-10-21 | DEF 14A | Proxy statement for the annual shareholder meeting on Dec 8, 2026 |
+| 2026-09-02 | 8-K | Current report |
+| 2026-07-29 | 8-K | Filed the same day as the 10-K, likely the Q4 FY26 earnings release |
 
-**Filed shortly before the 10-K:**
-- **PX14A6G** (shareholder-proposal solicitations by outside parties): July 22 and July 2, 2026
-- **Form 4** (insider trades): July 15, July 1, June 16, June 15, and three on June 12, 2026
-- **11-K** (employee benefit plan annual reports): two on June 25, 2026
+**Earlier in summer 2026:**
+- **PX14A6G** (July 22 and July 2): notices from shareholders, not Microsoft, urging votes on proxy matters.
+- **Form 4** (July 15, July 1, June 16, June 15, and three on June 12): reports of stock trades by insiders.
+- **11-K** (two, both June 25): annual reports on employee stock and savings plans.
 
-In short, Microsoft has filed its fiscal-year 10-K, one quarterly 10-Q, the proxy for the December annual meeting, and a steady run of 8-Ks. The DeepValues data doesn't say what each 8-K is about. The September 2 and November 4–5 filings could be things like debt or governance announcements; the links above go to the full documents if you need the details.
+Microsoft has filed 6 8-Ks since the 10-K. The data only lists form types and dates, so I've marked which 8-Ks are probably earnings releases based on timing. I didn't open any of them to confirm what they contain.
 
 ### fundamentals-ko
 
-DeepValues' latest annual figures for Coca-Cola (KO) are for **fiscal year 2025**, which ended December 31, 2025:
+The latest annual period in DeepValues for Coca-Cola (KO) is **fiscal year 2025**, which ended 31 December 2025.
 
-| Metric | FY2025 |
-|---|---|
-| Revenue | $47,941M |
-| Net income | $13,107M |
-| Free cash flow | $5,296M |
+| Metric | FY2025 | FY2024 (for comparison) |
+|---|---|---|
+| Revenue | **$47,941M** | $47,061M |
+| Net income | **$13,107M** | $10,631M |
+| Free cash flow | **$5,296M** | $4,741M |
 
-The data doesn't state its units. I've assumed millions of USD, which fits the size of KO's reported results.
+- The data didn't state units. I've assumed millions of USD, since the values match KO's reported scale (about $47–48B in revenue).
+- Free cash flow is much lower than net income because it is cash-based, while net income can include non-cash items.
+- Capital spending was $2,112M in FY2025.
 
-Free cash flow is much lower than net income. DeepValues lists capital spending of $2,112M, so cash from operations would be about $7.4B. That points to a large one-off cash outflow in operating cash flow during 2025, but the data doesn't say what it was.
+This is for information only, not investment advice.
 
 ### guru-lookup
 
-In DeepValues' guru roster, Li Lu's slug is **`li-lu`**. He's listed in the value style group.
+The guru roster lists Li Lu under the slug **`li-lu`**, as the head of Himalaya Capital in the "value" category.
 
-## Who Li Lu is (according to DeepValues)
+## Who Li Lu is, according to DeepValues
 
-- **Fund:** Himalaya Capital, which he founded in 1997 and runs from Seattle.
-- **Style:** Very concentrated value investing. The portfolio often has fewer than 10 positions, he holds them for years, and he sells very little each year.
-- **Best known for:** Introducing BYD to Charlie Munger in 2008. That became one of Berkshire Hathaway's most profitable non-US investments.
-- **Background:** He was born in China and helped organize the Tiananmen-era student protests before moving to the US. He sometimes lectures at Columbia Business School.
-- **Public profile:** Himalaya publishes no public investor letters, and Li Lu gives no media interviews.
-- The bio gives his age as 58. He's generally reported as born in 1966, which would make him about 60 now, so that part of the bio may be out of date.
+- **Firm:** He founded Himalaya Capital in 1997 and runs it from Seattle. He is 58.
+- **Style:** Concentrated value investing. The fund often holds fewer than 10 positions, keeps them for years, and has low single-digit annual turnover.
+- **Best-known move:** In 2008 he introduced BYD to Charlie Munger. DeepValues calls it one of Berkshire Hathaway's most profitable non-US investments.
+- **Background:** He was born in China and helped organise student protests in the Tiananmen era before moving to the US. He lectures occasionally at Columbia Business School, and his lectures circulate informally as PDFs.
+- **Public profile:** The bio says the firm publishes no investor letters and that he gives no media interviews.
 
-## Top holdings (13F for the quarter ending June 30, 2026)
+## Holdings (13F for Q3 2026, the quarter ending Sept 30)
 
-The filing shows 8 positions worth about **$3.70B** in total.
+The filing shows **8 positions worth about $3.78B in total**:
 
-| # | Ticker | Company | Value | % of portfolio | Change vs. prior quarter |
+| # | Ticker | Company | Value | % of portfolio | Change vs. last quarter |
 |---|---|---|---|---|---|
-| 1 | GOOGL | Alphabet Class A | $908.9M | 24.55% | unchanged |
-| 2 | GOOG | Alphabet Class C | $866.1M | 23.39% | unchanged |
-| 3 | PDD | PDD Holdings | $820.9M | 22.17% | **added** |
-| 4 | BRK.B | Berkshire Hathaway B | $554.6M | 14.98% | **added** |
-| 5 | EWBC | East West Bancorp | $358.4M | 9.68% | unchanged |
-| 6 | CROX | Crocs | $107.0M | 2.89% | unchanged |
-| 7 | TME | Tencent Music | $55.0M | 1.49% | unchanged |
-| 8 | AAPL | Apple | $32.0M | 0.86% | unchanged |
+| 1 | PDD | PDD Holdings | $917M | 24.2% | **Added** |
+| 2 | GOOGL | Alphabet (Class A) | $875M | 23.1% | Unchanged |
+| 3 | GOOG | Alphabet (Class C) | $835M | 22.1% | Unchanged |
+| 4 | BRK.B | Berkshire Hathaway | $552M | 14.6% | Unchanged |
+| 5 | EWBC | East West Bancorp | $344M | 9.1% | Unchanged |
+| 6 | TME | Tencent Music | $118M | 3.1% | **Added** |
+| 7 | CROX | Crocs | $104M | 2.8% | Unchanged |
+| 8 | AAPL | Apple | $37M | 1.0% | Unchanged |
 
 **What stands out:**
-- **Alphabet is about 48% of the portfolio** when you add the two share classes together.
-- Alphabet, PDD and Berkshire together make up about 85%.
-- **He added to PDD and Berkshire** this quarter and left every other position unchanged.
+- **Alphabet is the largest holding when its two share classes are combined**, at about 45% of the portfolio ($1.71B). PDD is the largest single line.
+- **The top four lines make up about 84%** of the portfolio, which fits the concentrated style described in the bio.
+- **He added to only two positions this quarter, PDD and Tencent Music.** Both are China-linked. Nothing was trimmed or sold.
+- **BYD does not appear in the filing.** A 13F only covers US-listed securities, so any Hong Kong-listed BYD shares the fund holds would not show up here.
 
-A 13F only shows US-listed long positions, so it may not include all of Himalaya's holdings, such as its long-reported stake in BYD. The figures are from the June 2026 quarter; the filing for the September quarter isn't in DeepValues yet. This is for information only and isn't investment advice.
+This is for information only and is not investment advice.
 
 ### sentiment-tsla
 
-DeepValues has no TSLA sentiment reading for the last 7 days, so there's no reading or source mix to give you.
+DeepValues doesn't have a 7-day sentiment reading for TSLA right now. I checked the combined feed, Reddit alone and StockTwits alone, and all three came back empty:
 
-| Source | Posts | Bullish / Bearish / Neutral | Top source |
-|---|---|---|---|
-| Combined | 0 | null / null / null | none |
-| Reddit | 0 | null / null / null | none |
-| StockTwits | 0 | null / null / null | none |
+| Source | Posts | Bullish | Bearish | Neutral | Top source |
+|---|---|---|---|---|---|
+| Combined | 0 | — | — | — | — |
+| Reddit | 0 | — | — | — | — |
+| StockTwits | 0 | — | — | — | — |
 
-All three came back with 0 posts and no timestamp. That means DeepValues has nothing on TSLA for this window. It doesn't mean sentiment was neutral. TSLA is one of the most discussed stocks there is, so zero posts most likely means a gap in their data rather than a quiet week.
+There's no date on the data and no sample quotes, so there's no reading or source mix to give you. It's very unlikely nobody posted about Tesla all week, so this is probably missing coverage in DeepValues rather than a real "neutral" result. Don't read it as sentiment being flat.
 
-I can check the 30-day window to see whether any data exists at all, or file a `request_data` report with DeepValues about the gap. Filing is free and doesn't need an account.
+Options:
+- **Try the 30-day or 24-hour window:** each call costs very little and counts toward the free daily allowance.
+- **Report the gap:** DeepValues has a free `request_data` tool for flagging missing data, and they say they read the requests weekly.
+- **Look at other value-investor signals:** for example, guru and smart-money position changes in TSLA, or DeepValues' research summary on the stock.
+
+Which would you like?
 
 ### unknown-ticker
 
-DeepValues has no intrinsic value for ZZZQ. The API returned a 404 error: "No intrinsic value data found for ticker ZZZQ." So I can't give you a valuation for it, and I won't estimate one.
+DeepValues has no intrinsic value data for ZZZQ. The API returned a 404 with "No intrinsic value data found for ticker ZZZQ," so I can't give you a value and I won't estimate one.
 
-ZZZQ may not be a real or listed ticker, or DeepValues may simply not cover it. If you meant a different symbol, give me the company name and I can look up the right ticker with DeepValues' company search. If ZZZQ is real and you need it, DeepValues takes free coverage requests through its `request_data` tool. I haven't sent one; tell me if you'd like me to.
+ZZZQ may not be a real or listed ticker, or DeepValues may just not cover it. If you meant a different symbol, I can search DeepValues' company list for it. If ZZZQ is real and you want it covered, I can send DeepValues a free coverage request through its `request_data` tool, but only if you ask me to.
